@@ -1,0 +1,27 @@
+{% extends 'todo_list/base.html' %}
+
+{% block title %}Supprimer la tâche{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md text-center">
+    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-rose-100 mb-4">
+        <span class="text-rose-600 text-xl">⚠️</span>
+    </div>
+    
+    <h1 class="text-xl font-bold text-slate-800 mb-2">Supprimer la tâche</h1>
+    <p class="text-slate-500 text-sm mb-6">
+        Êtes-vous sûr de vouloir supprimer définitivement la tâche : <br>
+        <strong class="text-slate-800 font-semibold">"{{ task.title }}"</strong> ?
+    </p>
+
+    <form method="POST" action="" class="flex flex-col gap-2">
+        {% csrf_token %}
+        <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-medium py-2 rounded-lg transition-colors cursor-pointer">
+            Oui, supprimer
+            </button>
+        <a href="/" class="w-full text-center border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium py-2 rounded-lg transition-colors">
+            Annuler et revenir
+        </a>
+    </form>
+</div>
+{% endblock %}

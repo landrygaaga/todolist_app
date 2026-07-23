@@ -1,0 +1,26 @@
+{% extends 'todo_list/base.html' %}
+
+{% block title %}Modifier la tâche{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+    <h1 class="text-xl font-bold text-slate-800 mb-6 text-center"> Modifier la tâche</h1>
+
+    <form method="POST" action="" class="space-y-4">
+        {% csrf_token %}
+        
+        <div class="[&_input]:w-full [&_input]:border [&_input]:border-slate-300 [&_input]:rounded-lg [&_input]:px-3 [&_input]:py-2 [&_input]:focus:outline-indigo-500 [&_input[type=checkbox]]:w-auto [&_input[type=checkbox]]:mt-2">
+            {{ form.as_p }}
+        </div>
+        
+        <div class="flex flex-col gap-2 pt-2">
+            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 rounded-lg transition-colors cursor-pointer text-center">
+                Enregistrer les modifications
+            </button>
+            <a href="/" class="w-full text-center border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium py-2 rounded-lg transition-colors">
+                Annuler
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

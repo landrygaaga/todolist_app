@@ -1,0 +1,50 @@
+{% extends 'todo_list/base.html' %}
+
+{% block title %}Mon Tableau de Bord{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+    <h1 class="text-2xl font-bold text-slate-800 text-center mb-6"> Mes Tâches</h1>
+
+    <!-- Formulaire d'ajout -->
+    <form method="POST" action="" class="mb-6">
+        {% csrf_token %}
+        <div class="flex flex-col gap-3">
+            <div class="grow [&_input]:w-full [&_input]:border [&_input]:border-slate-300 [&_input]:rounded-lg [&_input]:px-3 [&_input]:py-2 [&_input]:focus:outline-indigo-500">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 rounded-lg transition-colors cursor-pointer text-center">
+                Ajouter
+            </button>
+        </div>
+    </form>
+
+    <div class="border-t border-slate-100 my-4"></div>
+
+    <!-- Liste des tâches -->
+    <ul class="space-y-3">
+        {% for task in tasks %}
+            <li class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100 group hover:shadow-sm transition-shadow">
+                <span class="text-slate-700 break-all pr-2">
+                    {% if task.completed %}
+                        <span class="line-through text-slate-400">{{ task.title }}</span>
+                    {% else %}
+                        {{ task.title }}
+                    {% endif %}
+                </span>
+                
+                <div class="flex gap-2 shrink-0">
+                    <a href="{% url 'update_task' task.id %}" class="text-sm bg-amber-50 hover:bg-amber-100 text-amber-700 px-2 py-1 rounded-md transition-colors">
+                        Modifier
+                    </a>
+                    <a href="{% url 'delete_task' task.id %}" class="text-sm bg-rose-50 hover:bg-rose-100 text-rose-700 px-2 py-1 rounded-md transition-colors">
+                        Supprimer
+                    </a>
+                </div>
+            </li>
+        {% empty %}
+            <p class="text-center text-slate-400 text-sm py-4">Aucune tâche pour le moment </p>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
